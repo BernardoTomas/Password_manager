@@ -1,30 +1,34 @@
 import { useState } from 'react';
 import './Form.css';
+import { FormProps } from '../types/types';
 
-type FormProps = {
-  isVisible: (param: boolean) => void;
-};
-
-export default function Form({ isVisible }: FormProps) {
+export default function Form({ isInvisible, handleCadastroInfo }: FormProps) {
   const [submitBtnDisabled, setSubmitBtnDisabled] = useState(true);
-  const [serviceName, setServiceName] = useState('');
-  const [login, setLogin] = useState('');
-  const [password, setPassword] = useState('');
-  const [url, setUrl] = useState('');
 
-  const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/;
+  const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%#*?&]{8,16}$/;
   const patternLetAndNum = /^(?=.*[A-Za-z])(?=.*\d).+$/;
-  const patternSpecialChar = /^(?=.*[@$!%*?&]).+$/;
+  const patternSpecialChar = /^(?=.*[@$!#%*?&]).+$/;
   const patternLengthMin = /^[A-Za-z\d@$!%*?&]{8,}$/;
   const patternLengthMax = /^[A-Za-z\d@$!%*?&]{0,16}$/;
 
-  const handleSubmitBtn = () => {
+  const serviceName = 'nome-servico';
+
+  const [currentState, setCurrentState] = useState<{ [key: string] : string }>(
+    {
+      senha: '',
+      login: '',
+      URL: '',
+      'nome-servico': '',
+    },
+  );
+  const handleChange = (id: string, value: string) => {
+    const currentStateObject = { ...currentState, [id]: value };
+    setCurrentState(currentStateObject);
     if (
-      serviceName !== ''
-      && login !== ''
-      && password !== ''
-      && passwordPattern.test(password)
-      && url !== ''
+      currentStateObject[serviceName] !== ''
+      && currentStateObject.login !== ''
+      && passwordPattern.test(currentStateObject.senha)
+      && currentStateObject.URL !== ''
     ) {
       setSubmitBtnDisabled(false);
     } else {
@@ -33,18 +37,24 @@ export default function Form({ isVisible }: FormProps) {
   };
 
   const handlePasswordTips = (pWPattern: RegExp) => {
-    return pWPattern.test(password)
+    return pWPattern.test(currentState.senha)
       ? 'valid-password-check'
       : 'invalid-password-check';
   };
 
   const handleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    handleCadastroInfo({
+      serviceName: currentState[serviceName],
+      login: currentState.login,
+      password: currentState.senha,
+      url: currentState.URL,
+    });
+    isInvisible(true);
   };
 
   return (
     <form
-      onChange={ handleSubmitBtn }
       onSubmit={ handleOnSubmit }
       className="register-form"
     >
@@ -52,30 +62,36 @@ export default function Form({ isVisible }: FormProps) {
         <label htmlFor="nome-servico">
           Nome do serviço
           <input
-            value={ serviceName }
+            value={ currentState[serviceName] }
             type="text"
             id="nome-servico"
-            onChange={ ({ target }) => setServiceName(target.value) }
+            onChange={ ({ target }) => {
+              handleChange(target.id, target.value);
+            } }
           />
         </label>
 
         <label htmlFor="login">
           Login
           <input
-            value={ login }
+            value={ currentState.login }
             type="text"
             id="login"
-            onChange={ ({ target }) => setLogin(target.value) }
+            onChange={ ({ target }) => {
+              handleChange(target.id, target.value);
+            } }
           />
         </label>
 
         <label htmlFor="senha">
           Senha
           <input
-            value={ password }
+            value={ currentState.senha }
             type="password"
             id="senha"
-            onChange={ ({ target }) => setPassword(target.value) }
+            onChange={ ({ target }) => {
+              handleChange(target.id, target.value);
+            } }
           />
           <h6 className={ handlePasswordTips(patternLengthMin) }>
             Possuir 8 ou mais caracteres
@@ -94,23 +110,26 @@ export default function Form({ isVisible }: FormProps) {
         <label htmlFor="URL">
           URL
           <input
-            value={ url }
+            value={ currentState.URL }
             type="text"
             id="URL"
-            onChange={ ({ target }) => setUrl(target.value) }
+            onChange={ ({ target }) => {
+              handleChange(target.id, target.value);
+            } }
           />
         </label>
       </div>
       <div className="btns-container">
         <button
+          onClick={ () => console.log(currentState) }
+          type="submit"
           disabled={ submitBtnDisabled }
         >
           Cadastrar
         </button>
         <button
-          onClick={
-            () => isVisible(true)
-          }
+          type="button"
+          onClick={ () => isInvisible(true) }
         >
           Cancelar
         </button>
