@@ -13,6 +13,10 @@ export default function Form({ isVisible }: FormProps) {
   const [url, setUrl] = useState('');
 
   const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/;
+  const patternLetAndNum = /^(?=.*[A-Za-z])(?=.*\d).+$/;
+  const patternSpecialChar = /^(?=.*[@$!%*?&]).+$/;
+  const patternLengthMin = /^[A-Za-z\d@$!%*?&]{8,}$/;
+  const patternLengthMax = /^[A-Za-z\d@$!%*?&]{0,16}$/;
 
   const handleSubmitBtn = () => {
     if (
@@ -26,6 +30,12 @@ export default function Form({ isVisible }: FormProps) {
     } else {
       setSubmitBtnDisabled(true);
     }
+  };
+
+  const handlePasswordTips = (pWPattern: RegExp) => {
+    return pWPattern.test(password)
+      ? 'valid-password-check'
+      : 'invalid-password-check';
   };
 
   const handleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -67,6 +77,18 @@ export default function Form({ isVisible }: FormProps) {
             id="senha"
             onChange={ ({ target }) => setPassword(target.value) }
           />
+          <h6 className={ handlePasswordTips(patternLengthMin) }>
+            Possuir 8 ou mais caracteres
+          </h6>
+          <h6 className={ handlePasswordTips(patternLengthMax) }>
+            Possuir até 16 caracteres
+          </h6>
+          <h6 className={ handlePasswordTips(patternLetAndNum) }>
+            Possuir letras e números
+          </h6>
+          <h6 className={ handlePasswordTips(patternSpecialChar) }>
+            Possuir algum caractere especial
+          </h6>
         </label>
 
         <label htmlFor="URL">
