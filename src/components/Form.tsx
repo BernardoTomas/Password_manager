@@ -1,8 +1,16 @@
 import './Form.css';
 
-export default function Form() {
+type FormProps = {
+  isVisible: (param: boolean) => void;
+};
+
+export default function Form({ isVisible }: FormProps) {
   return (
-    <form>
+    <form
+      onSubmit={
+        (event) => event.preventDefault()
+      }
+    >
       <div className="inputs-container">
         <label htmlFor="nome-servico">
           Nome do serviço
@@ -26,7 +34,13 @@ export default function Form() {
       </div>
       <div className="btns-container">
         <button>Cadastrar</button>
-        <button>Cancelar</button>
+        <button
+          onClick={
+            () => isVisible(true)
+          }
+        >
+          Cancelar
+        </button>
       </div>
     </form>
   );
