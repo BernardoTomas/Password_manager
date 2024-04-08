@@ -14,7 +14,7 @@ function App() {
       <h1>Gerenciador de senhas</h1>
       {formVisibility ? (
         <Form
-          isVisible={handleFormVisibility}
+          isVisible={ handleFormVisibility }
         />
       ) : (
         <button
