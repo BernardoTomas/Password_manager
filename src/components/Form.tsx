@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs';
 import Swal from 'sweetalert2';
 import './Form.css';
 import { FormProps } from '../types/types';
@@ -74,8 +75,9 @@ export default function Form({ isInvisible, handleCadastroInfo }: FormProps) {
     >
       <div className="inputs-container">
         <label htmlFor="nome-servico">
-          Nome do serviço
+          <p>Nome do serviço</p>
           <input
+            className="text-input"
             value={ currentState[serviceName] }
             type="text"
             id="nome-servico"
@@ -85,9 +87,23 @@ export default function Form({ isInvisible, handleCadastroInfo }: FormProps) {
           />
         </label>
 
-        <label htmlFor="login">
-          Login
+        <label htmlFor="URL">
+          <p>URL</p>
           <input
+            className="text-input"
+            value={ currentState.URL }
+            type="text"
+            id="URL"
+            onChange={ ({ target }) => {
+              handleChange(target.id, target.value);
+            } }
+          />
+        </label>
+
+        <label htmlFor="login">
+          <p>Login</p>
+          <input
+            className="text-input"
             value={ currentState.login }
             type="text"
             id="login"
@@ -98,15 +114,26 @@ export default function Form({ isInvisible, handleCadastroInfo }: FormProps) {
         </label>
 
         <label htmlFor="senha">
-          Senha
-          <input
-            value={ currentState.senha }
-            type={ toggleFormPassword }
-            id="senha"
-            onChange={ ({ target }) => {
-              handleChange(target.id, target.value);
-            } }
-          />
+          <p>Senha</p>
+          <div className="senha-container">
+            <input
+              value={ currentState.senha }
+              type={ toggleFormPassword }
+              id="senha"
+              onChange={ ({ target }) => {
+                handleChange(target.id, target.value);
+              } }
+            />
+            <button
+              type="button"
+              data-testid="show-hide-form-password"
+              onClick={ handleToggleFormPassword }
+            >
+              { toggleFormPassword === 'password' ? <BsEyeFill /> : <BsEyeSlashFill /> }
+            </button>
+          </div>
+        </label>
+        <div className="tips-container">
           <h6 className={ handlePasswordTips(patternLengthMin) }>
             Possuir 8 ou mais caracteres
           </h6>
@@ -119,42 +146,26 @@ export default function Form({ isInvisible, handleCadastroInfo }: FormProps) {
           <h6 className={ handlePasswordTips(patternSpecialChar) }>
             Possuir algum caractere especial
           </h6>
-        </label>
+        </div>
 
-        <button
-          type="button"
-          data-testid="show-hide-form-password"
-          onClick={ handleToggleFormPassword }
-        >
-          Esconder senha
-        </button>
-
-        <label htmlFor="URL">
-          URL
-          <input
-            value={ currentState.URL }
-            type="text"
-            id="URL"
-            onChange={ ({ target }) => {
-              handleChange(target.id, target.value);
-            } }
-          />
-        </label>
       </div>
       <div className="btns-container">
+        <button
+          type="button"
+          onClick={ () => isInvisible(true) }
+          className="cancelar-btn"
+        >
+          Cancelar
+        </button>
         <button
           onClick={ () => console.log(currentState) }
           type="submit"
           disabled={ submitBtnDisabled }
+          className="cadastrar-btn"
         >
           Cadastrar
         </button>
-        <button
-          type="button"
-          onClick={ () => isInvisible(true) }
-        >
-          Cancelar
-        </button>
+
       </div>
     </form>
   );

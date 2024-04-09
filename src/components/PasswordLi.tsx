@@ -1,4 +1,7 @@
+import { FaAngleRight } from 'react-icons/fa6';
+import { ImCancelCircle } from 'react-icons/im';
 import { UseableCadastroListType } from '../types/types';
+import './PasswordLi.css';
 
 const PasswordsList = ({
   isPasswordVisible,
@@ -9,22 +12,36 @@ const PasswordsList = ({
   return passwordArray.map(({ serviceName, login, password, url }, index) => {
     return (
       <li key={ serviceName + index }>
-        <a href={ url }>{ serviceName }</a>
-        <h4>
-          Login:
-          { login }
-        </h4>
-        <h4>
-          Senha:
-          { isPasswordVisible ? '******' : password }
-        </h4>
-        <button
-          type="button"
-          data-testid="remove-btn"
-          onClick={ () => deleteLiAtIndex(index) }
-        >
-          Deletar
-        </button>
+        <div className="li-text-container">
+          <div className="li-data-container">
+            <h4>
+              Login:
+            </h4>
+            &nbsp;&nbsp;
+            <p>{ login }</p>
+          </div>
+          <div className="li-data-container">
+            <h4>
+              Senha:
+            </h4>
+            &nbsp;&nbsp;
+            <p>{ isPasswordVisible ? '******' : password }</p>
+          </div>
+        </div>
+        <div className="li-btn-container">
+          <a className="li-link" href={ url }>
+            { serviceName }
+            <FaAngleRight />
+          </a>
+          <button
+            type="button"
+            data-testid="remove-btn"
+            onClick={ () => deleteLiAtIndex(index) }
+            className="li-delete-btn"
+          >
+            <ImCancelCircle />
+          </button>
+        </div>
       </li>
     );
   });

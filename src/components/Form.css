@@ -1,12 +1,121 @@
+.register-form {
+  background-color: rgb(35, 16, 65);
+  border-radius: 8px;
+  box-shadow: 2px 2px 16px rgba(92, 29, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  min-width: 400px;
+  padding: 32px;
+  width: 30%;
+}
+
 .inputs-container {
   display: flex;
   flex-direction: column;
+  gap: 16px;
+}
+
+.register-form label {
+  align-items: center;
+  background-color: rgb(166, 150, 193);
+  border-radius: 50px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  z-index: 2;
+}
+
+.register-form label p {
+  color: rgb(55, 1, 105);
+  font-weight: 600;
+  padding-left: 16px;
+}
+
+input {
+  border: none;
+  border-radius: 50px;
+  font-size: 16px;
+  line-height: 40px;
+  text-indent: 16px;
+}
+
+.text-input {
+  width: 50%;
+}
+
+.senha-container {
+  align-items: center;
+  display: flex;
+  width: 50%;
+}
+
+.senha-container input {
+  width: 100%;
+}
+
+.senha-container button {
+  background-color: rgb(76, 41, 133);
+  border: none;
+  border-radius: 50px;
+  color: white;
+  height: 32px;
+  margin-left: -36px;
+  width: 32px;
+}
+
+.tips-container {
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 0 0 20px 20px;
+  margin-top: -32px;
+  padding: 24px 16px 16px;
+  z-index: 0;
+}
+
+h6 {
+  font-size: 12px;
+  padding: 8px 0;
 }
 
 .valid-password-check {
-  color: rgb(18, 99, 18);
+  border-left: 2px solid rgb(55, 1, 105);
+  color: rgb(55, 1, 105);
+  padding-left: 16px;
 }
 
 .invalid-password-check {
-  color: rgb(143, 18, 18);
+  border-left: 2px solid rgb(102, 46, 0);
+  color: rgb(102, 46, 0);
+  padding-left: 16px;
+}
+
+.btns-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
+}
+
+.btns-container button {
+  border-radius: 4px;
+  box-shadow: 2px 2px 15px rgb(19, 0, 31);
+  font-family: Montserrat , sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  padding: 16px 32px;
+  width: 46%;
+}
+
+.cadastrar-btn {
+  background-color: rgb(18, 136, 3);
+  border: 4px solid white;
+  color: white;
+}
+
+.cadastrar-btn:disabled {
+  background-color: rgb(92, 104, 86);
+}
+
+.cancelar-btn {
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 4px solid rgb(204, 108, 19);
+  color: rgb(238, 157, 82);
 }

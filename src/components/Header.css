@@ -1,0 +1,17 @@
+h1 {
+  color: white;
+  font-family: Zen Dots , sans-serif;
+}
+
+.header {
+  background-color: rgb(28, 23, 36);
+  padding: 40px;
+}
+
+.logo-icon {
+  color: rgb(211, 126, 21);
+}
+
+.shield-icon {
+  color: rgb(16, 163, 50);
+}
