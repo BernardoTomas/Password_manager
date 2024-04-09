@@ -1,6 +1,10 @@
 import { UseableCadastroListType } from '../types/types';
 
-const PasswordsList = ({ passwordArray, deleteLiAtIndex }: UseableCadastroListType) => {
+const PasswordsList = ({
+  isPasswordVisible,
+  passwordArray,
+  deleteLiAtIndex,
+}: UseableCadastroListType) => {
   if (passwordArray.length === 0) return;
   return passwordArray.map(({ serviceName, login, password, url }, index) => {
     return (
@@ -12,7 +16,7 @@ const PasswordsList = ({ passwordArray, deleteLiAtIndex }: UseableCadastroListTy
         </h4>
         <h4>
           Senha:
-          { password }
+          { isPasswordVisible ? '******' : password }
         </h4>
         <button
           type="button"
