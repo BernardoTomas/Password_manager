@@ -4,6 +4,7 @@ import { FormProps } from '../types/types';
 
 export default function Form({ isInvisible, handleCadastroInfo }: FormProps) {
   const [submitBtnDisabled, setSubmitBtnDisabled] = useState(true);
+  const [toggleFormPassword, setToggleFormPassword] = useState('password');
 
   const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%#*?&]{8,16}$/;
   const patternLetAndNum = /^(?=.*[A-Za-z])(?=.*\d).+$/;
@@ -54,6 +55,12 @@ export default function Form({ isInvisible, handleCadastroInfo }: FormProps) {
     isInvisible(true);
   };
 
+  const handleToggleFormPassword = () => {
+    return toggleFormPassword === 'password'
+      ? setToggleFormPassword('text')
+      : setToggleFormPassword('password');
+  };
+
   return (
     <form
       onSubmit={ handleOnSubmit }
@@ -88,7 +95,7 @@ export default function Form({ isInvisible, handleCadastroInfo }: FormProps) {
           Senha
           <input
             value={ currentState.senha }
-            type="password"
+            type={ toggleFormPassword }
             id="senha"
             onChange={ ({ target }) => {
               handleChange(target.id, target.value);
@@ -107,6 +114,14 @@ export default function Form({ isInvisible, handleCadastroInfo }: FormProps) {
             Possuir algum caractere especial
           </h6>
         </label>
+
+        <button
+          type="button"
+          data-testid="show-hide-form-password"
+          onClick={ handleToggleFormPassword }
+        >
+          Esconder senha
+        </button>
 
         <label htmlFor="URL">
           URL
