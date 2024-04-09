@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Swal from 'sweetalert2';
 import './Form.css';
 import { FormProps } from '../types/types';
 
@@ -53,6 +54,11 @@ export default function Form({ isInvisible, handleCadastroInfo }: FormProps) {
       url: currentState.URL,
     });
     isInvisible(true);
+    Swal.fire({
+      timer: 1500,
+      text: 'Serviço cadastrado com sucesso',
+      icon: 'success',
+    });
   };
 
   const handleToggleFormPassword = () => {
