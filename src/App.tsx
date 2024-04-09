@@ -16,6 +16,12 @@ function App() {
     return setCadastrosData([...cadastrosData, newCadastro]);
   };
 
+  const handleDeleteLi = (indexToDelete: number) => {
+    return setCadastrosData(
+      cadastrosData.filter((_, index) => index !== indexToDelete),
+    );
+  };
+
   return (
     <div>
       <h1>Gerenciador de senhas</h1>
@@ -36,7 +42,10 @@ function App() {
         {
           cadastrosData.length === 0
             ? <h3>Nenhuma senha cadastrada</h3>
-            : <PasswordsList passwordArray={ cadastrosData } />
+            : <PasswordsList
+                passwordArray={ cadastrosData }
+                deleteLiAtIndex={ handleDeleteLi }
+            />
         }
       </ul>
     </div>

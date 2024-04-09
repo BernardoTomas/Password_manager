@@ -1,10 +1,10 @@
 import { UseableCadastroListType } from '../types/types';
 
-const PasswordsList = ({ passwordArray }: UseableCadastroListType) => {
+const PasswordsList = ({ passwordArray, deleteLiAtIndex }: UseableCadastroListType) => {
   if (passwordArray.length === 0) return;
   return passwordArray.map(({ serviceName, login, password, url }, index) => {
     return (
-      <li key={ index }>
+      <li key={ serviceName + index }>
         <a href={ url }>{ serviceName }</a>
         <h4>
           Login:
@@ -14,6 +14,13 @@ const PasswordsList = ({ passwordArray }: UseableCadastroListType) => {
           Senha:
           { password }
         </h4>
+        <button
+          type="button"
+          data-testid="remove-btn"
+          onClick={ () => deleteLiAtIndex(index) }
+        >
+          Deletar
+        </button>
       </li>
     );
   });

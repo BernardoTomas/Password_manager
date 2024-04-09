@@ -12,4 +12,5 @@ export type FormProps = {
 
 export type UseableCadastroListType = {
   passwordArray: CadastroObjectType[];
+  deleteLiAtIndex: (param: number) => void;
 };

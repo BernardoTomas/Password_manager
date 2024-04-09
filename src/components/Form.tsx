@@ -21,6 +21,7 @@ export default function Form({ isInvisible, handleCadastroInfo }: FormProps) {
       'nome-servico': '',
     },
   );
+
   const handleChange = (id: string, value: string) => {
     const currentStateObject = { ...currentState, [id]: value };
     setCurrentState(currentStateObject);
