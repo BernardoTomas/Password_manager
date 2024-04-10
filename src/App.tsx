@@ -51,7 +51,6 @@ function App() {
             </button>
           )
         }
-        <div className="separator" />
         <div className="list-container">
           {
             cadastrosData.length > 0
