@@ -13,7 +13,7 @@ This is a password manager application built with React and TypeScript. It allow
 
 1. Clone the repository:
     ```sh
-    git clone https://github.com/your-username/password-manager.git
+    git clone git@github.com:BernardoTomas/Password_manager.git
     ```
 2. Navigate to the project directory:
     ```sh
